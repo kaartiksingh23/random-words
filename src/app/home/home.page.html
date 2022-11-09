@@ -1,0 +1,44 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Wordzz
+    </ion-title>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-searchbar [debounce]="1000" (ionChange)="onSearch($event)"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <ion-refresher #refresherRef slot="fixed" (ionRefresh)="getRandomWord($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <virtual-scroll-element class="ion-content-scroll-host">
+    <div>
+      <ion-card class="word-card">
+        <ion-item > 
+          <ion-text>{{randomWord}}</ion-text>
+        </ion-item>
+      
+        <ion-card-content class="meaning">
+          {{definition}}
+  
+          <ion-list *ngIf="examples.length>0">
+            <ion-list-header> Examples </ion-list-header>
+  
+            <ion-item *ngFor="let example of examples">
+              <ion-label>
+                <h2>{{example}}</h2>
+              </ion-label>
+            </ion-item>
+          </ion-list>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </virtual-scroll-element>
+  
+</ion-content>
+
+
